@@ -1,5 +1,6 @@
 # 213-Project-1
-Software that is used to manage the information of a collection of albums owned by the user. 
+
+## Project Description ##
 
 You will develop a simple software to manage the information of a collection of albums owned by the user. This
 project uses the IDE console as the user interface and utilizes the Java standard input and output to manage the
@@ -21,38 +22,52 @@ A command line always begins with a command, in uppercase letters, and followed 
 Each data token is also delimited by a comma. Some examples of valid command lines are demonstrated below. All
 commands are case-sensitive, which means the commands with lowercase letters are invalid. You are required to deal
 with bad commands that are not supported. Your software must support the following commands.
-1. A command, to add an album to the collection, for example,
+#### 1. A command, to add an album to the collection, for example, ####
+   
     A,Famous Friends,Chris Young,Country,8/6/2021
-The above command line adds an album to the collection, including the title, artist, genre, and the release date. If
-the command line includes a random genre, use “unknown” as the genre. You should set the album as available
-by default when you are adding a new album to the collection. The release date shall be given in mm/dd/yyyy
-format. You must always check if the date is valid with the isValid() method in the Date class. You should also
-check if the album is already in the collection before you add it. For simplicity, we consider two albums as equal
-if their title and artist are the same. In this case, do not add it to the collection. See sample output for the messages
-to display.
-2. D command to remove an album from the collection, for example, 
+
+    The above command line adds an album to the collection, including the title, artist, genre, and the release date. If
+    the command line includes a random genre, use “unknown” as the genre. You should set the album as available
+    by default when you are adding a new album to the collection. The release date shall be given in mm/dd/yyyy
+    format. You must always check if the date is valid with the isValid() method in the Date class. You should also
+    check if the album is already in the collection before you add it. For simplicity, we consider two albums as equal
+    if their title and artist are the same. In this case, do not add it to the collection. See sample output for the messages
+    to display.
+
+#### 2. D command to remove an album from the collection, for example, #### 
+
     D,Famous Friends,Chris Young
-The above command line removes an album from the collection provided the title and artist. Let’s assume that
-multiple albums may have the same artist, or same title, but the combination of the tile and artist is unique. Only
-the album with the matching title and artist will be deleted from the collection. See sample output for the messages
-to display.
-3. L command to lend out an album to a friend, for example
+
+    The above command line removes an album from the collection provided the title and artist. Let’s assume that
+    multiple albums may have the same artist, or same title, but the combination of the tile and artist is unique. Only
+    the album with the matching title and artist will be deleted from the collection. See sample output for the messages
+    to display.
+
+#### 3. L command to lend out an album to a friend, for example ####
+  
     L,Famous Friends,Chris Young
-The above command line sets the album to be “not available”. For simplicity, we do not keep track of the friend’s
-information. Display proper messages depending on the results. See sample output.
-4. R command to return an album when the friend is returning the album, for example
+
+    The above command line sets the album to be “not available”. For simplicity, we do not keep track of the friend’s
+    information. Display proper messages depending on the results. See sample output.
+
+#### 4. R command to return an album when the friend is returning the album, for example ####
+    
     R,Famous Friends,Chris Young
-The command line above sets the album to be “available”. Display proper messages depending on the results.
-See sample output.
-5. P command to display the list of albums in the collection, for example,    
+    
+    The command line above sets the album to be “available”. Display proper messages depending on the results.
+    See sample output.
+
+#### 5. P command to display the list of albums in the collection, for example, ####    
+
     P //display the collection without specifying the order
     PD //display the collection sorted by the release dates
-    PG //display the collection sorted by the genres    
-6. Q command to stop the program execution and display "Collection Manager terminated."    
+    PG //display the collection sorted by the genres  
+    
+#### 6. Q command to stop the program execution and display "Collection Manager terminated." ####    
 
 
 
-Program Requirement
+## Program Requirement ##
 
 1. You MUST follow the software development ground rules. You will lose points if you are not following the rules.
 2. There are sample input and output at the end of this document for your reference. The graders will be using the
