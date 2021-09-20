@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author kianaperst
+ * @author Kiana Perst
  *
  */
 package album;
