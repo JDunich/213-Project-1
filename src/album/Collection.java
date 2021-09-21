@@ -14,7 +14,7 @@ public class Collection {
     private Album[] albums;
     private int numAlbums; //number of albums currently in the collection
 
-    @Override//find the album index, or return NOT_FOUND
+    //find the album index, or return NOT_FOUND
     private int find(Album album) {
         int i;
         for(i = 0; i < albums.length; i++){
@@ -25,50 +25,90 @@ public class Collection {
         return -1;
     }
 
-    @Override//increase the capacity of the array list by 4
+    //increase the capacity of the array list by 4
     private void grow() {
         Album[] temp = copyOver(albums, 4);
+        numAlbums += 4;
+        albums = temp;
     }
 
-    @Override
+    //adds album to the array list
     public boolean add(Album album) {
+        if (find(album) == -1){return false;}
         Album[] temp = copyOver(albums, 1);
         temp[numAlbums] = album;
+        numAlbums++;
         albums = temp;
         return true;
     }
 
-    @Override
-    public boolean remove(Album album) {}
+    //removes album and keeps the same order
+    public boolean remove(Album album) {
+        int i = find(album);
+        if (i == -1){return false;}
+        Album[] temp = new Album[numAlbums-1];
+        int j;
+        for (j = 0; j < i; j++){
+            temp[j] = albums[j];
+        }
+        for (i = i+1; i < albums.length - 1; i++){
+            temp[i-1] = albums[i+1];
+        }
+        return true;
+    }
 
-    @Override//set to not available
+    //set to not available //TODO: isAvailible constructor
     public boolean lendingOut(Album album) {
-        album.isAvailable = false;
+        int i;
+        for (i = 0; i < albums.length; i++){
+            if (albums[i] == album && albums[i].getAvailable() == true){
+                return true;
+            }
+        }
+        return false;
     }
 
-    @Override//set to available
+    //set to available //TODO: isAvailible constructor
     public boolean returnAlbum(Album album) {
-        album.isAvailable = true;
+        int i;
+        for (i = 0; i < albums.length; i++){
+            if (albums[i] == album && albums[i].getAvailable() == false){
+                return true;
+            }
+        }
+        return false;
     }
 
-    @Override//display the list without specifying the order
+    //display the list without specifying the order
     public void print() {
-        System.out.println(albums);
+        if (albums == null){
+            System.out.println("The collection is empty!");
+        }else {
+            System.out.println(albums);
+        }
     }
 
-    @Override
+    //Prints by release date
     public void printByReleaseDate() {
-        Album[] temp = inOrderDate(albums);
-        System.out.println(temp);
+        if (albums == null){
+            System.out.println("The collection is empty!");
+        }else {
+            Album[] temp = inOrderDate(albums);
+            System.out.println(temp);
+        }
     }
 
-    @Override
+    //Prints by genre
     public void printByGenre() {
-        Album[] temp = inOrderGenre(albums);
-        System.out.println(temp);
+        if (albums == null){
+            System.out.println("The collection is empty!");
+        }else {
+            Album[] temp = inOrderGenre(albums);
+            System.out.println(temp);
+        }
     }
 
-    @Override
+    //Copies the Album list and extends by n
     public Album[] copyOver(Album[] album, int num){
         Album[] arr = new Album[album.length];
         int i;
@@ -81,9 +121,39 @@ public class Collection {
         return arr;
     }
 
-    @Override
+    //Orders the album list by Date
     public Album[] inOrderDate(Album[] album){
-
+        int n = album.length;
+        for (int i = 1; i < n; i++){
+            Album key = album[i];
+            int j = i - 1;
+            while(j >= 0 && compareTo(album[j]) > compareTo(key)){
+                album[j + 1] = album[j];
+                j = j-1;
+            }
+            album[j + 1] =  key;
+        }
+        return album;
     }
 
+    //Orders the album list by Genre //TODO: Constructor for genre
+    public Album[] inOrderGenre(Album[] album){
+        int n = album.length;
+        for (int i = 1; i < n; i++){
+            Album key = album[i];
+            int j = i - 1;
+            while(j >= 0 && album[j].genre.ordinal() > key.genre.ordinal()){
+                album[j + 1] = album[j];
+                j = j-1;
+            }
+            album[j + 1] =  key;
+        }
+        return album;
+    }
+
+
+    //TODO: remove this temporary testbed
+    public static void main(String[] args) {
+        System.out.println("here");
+    }
 }

@@ -1,2 +1,8 @@
 /bin/
 .DS_Store
+/.idea/workspace.xml
+/.idea/vcs.xml
+/.idea/runConfigurations.xml
+/.idea/modules.xml
+/213-Project-1.iml
+/.idea/misc.xml
