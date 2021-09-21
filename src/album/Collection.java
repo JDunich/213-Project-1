@@ -154,6 +154,6 @@ public class Collection {
 
     //TODO: remove this temporary testbed
     public static void main(String[] args) {
-        System.out.println("here");
+
     }
 }
