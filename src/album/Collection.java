@@ -61,18 +61,18 @@ public class Collection {
     public boolean lendingOut(Album album) {
         int i;
         for (i = 0; i < albums.length; i++){
-            if (albums[i] == album && albums[i].getAvailable() == true){
+            if (albums[i] == album && albums[i].getAvailable()){
                 return true;
             }
         }
         return false;
     }
 
-    //set to available //TODO: isAvailible constructor
+    //set to available //TODO: isAvailible getter
     public boolean returnAlbum(Album album) {
         int i;
         for (i = 0; i < albums.length; i++){
-            if (albums[i] == album && albums[i].getAvailable() == false){
+            if (albums[i] == album && !albums[i].getAvailable()){
                 return true;
             }
         }
@@ -84,7 +84,11 @@ public class Collection {
         if (albums == null){
             System.out.println("The collection is empty!");
         }else {
-            System.out.println(albums);
+            System.out.println("*List of albums in the collection.");
+            for(int i = 0; i < numAlbums; i++){
+                System.out.println(albums[i].toString());
+            }
+            System.out.println("*End of List");
         }
     }
 
@@ -94,7 +98,11 @@ public class Collection {
             System.out.println("The collection is empty!");
         }else {
             Album[] temp = inOrderDate(albums);
-            System.out.println(temp);
+            System.out.println("*Album collection by release date.");
+            for(int i = 0; i < numAlbums; i++){
+                System.out.println(temp[i].toString());
+            }
+            System.out.println("*End of List");
         }
     }
 
@@ -104,7 +112,11 @@ public class Collection {
             System.out.println("The collection is empty!");
         }else {
             Album[] temp = inOrderGenre(albums);
-            System.out.println(temp);
+            System.out.println("*Album collection by genre.");
+            for(int i = 0; i < numAlbums; i++){
+                System.out.println(temp[i].toString());
+            }
+            System.out.println("*End of List");
         }
     }
 
@@ -121,13 +133,14 @@ public class Collection {
         return arr;
     }
 
-    //Orders the album list by Date
+    //Orders the album list by Date//TODO: getter for releaseDate
     public Album[] inOrderDate(Album[] album){
         int n = album.length;
-        for (int i = 1; i < n; i++){
+        for (int i = 0; i < n; i++){
             Album key = album[i];
             int j = i - 1;
-            while(j >= 0 && compareTo(album[j]) > compareTo(key)){
+            Date temp = new Date(key.getReleaseDate());
+            while(j >= 0 && temp.compareTo(new Date(album[j].getReleaseDate()))){
                 album[j + 1] = album[j];
                 j = j-1;
             }
@@ -136,7 +149,7 @@ public class Collection {
         return album;
     }
 
-    //Orders the album list by Genre //TODO: Constructor for genre
+    //Orders the album list by Genre //TODO: getter for genre
     public Album[] inOrderGenre(Album[] album){
         int n = album.length;
         for (int i = 1; i < n; i++){
@@ -151,9 +164,4 @@ public class Collection {
         return album;
     }
 
-
-    //TODO: remove this temporary testbed
-    public static void main(String[] args) {
-
-    }
 }

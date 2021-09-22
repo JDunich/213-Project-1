@@ -9,29 +9,29 @@ import java.util.StringTokenizer;
  *
  */
 public class CollectionManager {
-    //reads the command line and runs line based on isValid() TODO: figure out how to print albums the way it is displayed on test
+    //reads the command line and runs line based on isValid()
     public void run(){
         Scanner sc = new Scanner(System.in);
         while(true){
             String s = sc.nextLine();
             StringTokenizer input = new StringTokenizer(s, ",");
-            if(!isValid(input)){System.out.println("Invalid command!");}
+            if(!isValid(s)){System.out.println("Invalid command!");}
             String command = input.nextToken();
-            if(isPrintCommand(command)){task(command, "");}
+            if(command == "A" && !getValidDate(input)){System.out.println("Invalid Date!");}
+            if(isPrintCommand(command)){task(command, null);}
             else{
             Album album = createAlbum(input);
-
+            task(command, album);
             }
         }
     }
     //creates an Album object
     public Album createAlbum(StringTokenizer input){
-        Album temp = new Album();
         String title = input.nextToken();
         String artist = input.nextToken();
-        String genre = input.nextToken();
-        String releaseDate = input.nextToken();
-        temp.Album(title, artist, genre, releaseDate);
+        Genre genre = Genre.valueOf(input.nextToken());
+        Date releaseDate = new Date(input.nextToken());
+        Album temp = new Album(title, artist, genre, releaseDate);
         return temp;
     }
 
@@ -40,41 +40,50 @@ public class CollectionManager {
         return false;
     }
 
-    public void task(String command, String album){
+    public void task(String command, Album album){
+        Collection arr = new Collection();
         if(command == "A"){
-            if(add(album)){System.out.println(album + " >> added.");}
-            else{System.out.println(album + " >> is already in the collection.");}
+            if(arr.add(album)){System.out.println(album + " >> added.");}
+            else{System.out.println(album.toString() + " >> is already in the collection.");}
         }else if(command == "D"){
-            if(remove(album)){System.out.println(album + " >> deleted.");}
-            else{System.out.println(album + " >> is already in the collection.");}
+            if(arr.remove(album)){System.out.println(album + " >> deleted.");}
+            else{System.out.println(album.toString() + " >> is already in the collection.");}
         }else if(command == "L") {
-            if (lendingOut(album)) {
+            if (arr.lendingOut(album)) {
                 System.out.println(album + " >> lending out and set to not available.");
-            } else {System.out.println(album + " >> is not available.");}
+            } else {System.out.println(album.toString() + " >> is not available.");}
         }else if(command == "R"){
-            if(returnAlbum(album)){System.out.println(album + " >> returning and set to available.");}
-            else{System.out.println(album + " >> return cannot be completed.");}
+            if(arr.returnAlbum(album)){System.out.println(album + " >> returning and set to available.");}
+            else{System.out.println(album.toString() + " >> return cannot be completed.");}
         }else if(command == "P"){
-            System.out.println("*List of albums in collection.");
-            print();
-            System.out.println("*End of list.");
+            arr.print();
         }else if(command == "PD"){
-            System.out.println("*Album collection by release date.");
-            printByReleaseDate();
-            System.out.println("*End of list.");
+            arr.printByReleaseDate();
         }else if(command == "PG"){
-            System.out.println("*Album collection by genre.");
-            printByGenre();
-            System.out.println("*End of list.");
+            arr.printByGenre();
         }else if(command == "Q"){
             System.out.println("Collection Manager terminated.");
             System.exit(0);
         }
     }
-    //TODO: Code this
-    public boolean isValid(StringTokenizer input){
-        //checks if the input is valid
+
+
+    //Checks if the command is valid
+    public boolean isValid(String input){
+        StringTokenizer temp = new StringTokenizer(input, ",");
+        String ptr = temp.nextToken();
+        if(!ptr.matches("A|D|L|R|P|PD|PG|Q")){return false;}
+        return true;
     }
 
+    public boolean getValidDate(StringTokenizer input){
+        String ptr = null;
+            for(int i = 0; i < 5; i++){
+                ptr = input.nextToken();
+            }
+            Date temp = new Date(ptr);
+            if(!temp.isValid()){return false;}
+       return true;
+    }
 
 }
