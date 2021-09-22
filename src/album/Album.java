@@ -1,8 +1,5 @@
 package album;
 import java.util.Scanner; //TODO: REMOVE THIS IT IS NOT ALLOWED IN FINAL CODE
-/**
- * 
- */
 
 /**
  * This class defines the abstract data type that models an album in a collection of albums
@@ -36,15 +33,31 @@ public class Album {
     //Determines if two albums are equal based on the title and artist
     @Override
     public boolean equals(Object obj) {
-        //TODO: write method
+        if () {
+            
+        }
+        return false;
     }
     
+    //TODO: Finish this method after you do Date class
     @Override
     public String toString(){
         String result;
         String separator = "::";
-        result = title + separator + artist + separator + genre + separator;
+        result = title + separator + artist + separator + genre + separator ;
         return result;
+    }
+    
+    public Genre getGenre() {
+        return genre;
+    }
+    
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+    
+    public boolean getAvailable() {
+        return isAvailable;
     }
     
     //TODO: remove this temporary testbed

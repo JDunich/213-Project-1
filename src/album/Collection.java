@@ -18,7 +18,7 @@ public class Collection {
     private int find(Album album) {
         int i;
         for(i = 0; i < albums.length; i++){
-            if(albums.equals(album)){
+            if(albums[i].equals(album)){
                     return i;
             }
         }
@@ -139,8 +139,8 @@ public class Collection {
         for (int i = 0; i < n; i++){
             Album key = album[i];
             int j = i - 1;
-            Date temp = new Date(key.getReleaseDate());
-            while(j >= 0 && temp.compareTo(new Date(album[j].getReleaseDate()))){
+            Date temp = key.getReleaseDate();
+            while(j >= 0 && temp.compareTo(album[j].getReleaseDate())){
                 album[j + 1] = album[j];
                 j = j-1;
             }
@@ -155,7 +155,7 @@ public class Collection {
         for (int i = 1; i < n; i++){
             Album key = album[i];
             int j = i - 1;
-            while(j >= 0 && album[j].genre.ordinal() > key.genre.ordinal()){
+            while(j >= 0 && album[j].getGenre().ordinal() > key.getGenre().ordinal()){
                 album[j + 1] = album[j];
                 j = j-1;
             }

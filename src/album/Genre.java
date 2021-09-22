@@ -1,7 +1,4 @@
 package album;
-/**
- * 
- */
 
 /**
  * @author Kiana Perst
