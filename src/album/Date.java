@@ -181,11 +181,14 @@ public class Date implements Comparable<Date> {
      * This method returns a Date object back into a string
      * @return string
      */
-    @Override
-    public String toString(){
+    public String dateToString(){
         
         String separator = "/";
-        return valueOf(month);
+        String month = String.valueOf(this.month);
+        String day = String.valueOf(this.day);
+        String year = String.valueOf(this.year);
+        String result = month + separator + day + separator + year;
+        return result;
     }
     
     // Testbed main for the Date class

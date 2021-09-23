@@ -12,6 +12,9 @@ public class Album {
     private Date releaseDate;
     private boolean isAvailable;
     
+    /** 
+     * Constructor that creates an empty Album object
+     */
     public Album() {
         title = null;
         artist = null;
@@ -20,6 +23,10 @@ public class Album {
         isAvailable = false;
     }
     
+    /** 
+     * Constructor that creates an Album object
+     * @param title, artist, genre, releaseDate
+     */
     public Album(String title, String artist, Genre genre, Date releaseDate) {
         
         this.title = title;
@@ -33,8 +40,8 @@ public class Album {
     //Determines if two albums are equal based on the title and artist
     @Override
     public boolean equals(Object obj) {
-        if () {
-            
+        if ((title == ((Album)obj).getTitle()) && (artist == ((Album)obj).getArtist())) {
+            return true;
         }
         return false;
     }
@@ -44,20 +51,66 @@ public class Album {
     public String toString(){
         String result;
         String separator = "::";
-        result = title + separator + artist + separator + genre + separator ;
+        String available_str;
+        
+        if(isAvailable) {
+            available_str = "is available";
+        }
+        else {
+            available_str = "is not available";
+        }
+        
+        result = title + separator + artist + separator + genre + separator + 
+                releaseDate.dateToString() + separator + available_str;
         return result;
     }
     
+    /**
+     * Getter method for title field
+     * @return string
+     */
+    public String getTitle() {
+        return title;
+    }
+    
+    /**
+     * Getter method for artist field
+     * @return string
+     */
+    public String getArtist() {
+        return artist;
+    }
+    
+    /**
+     * Getter method for genre field
+     * @return genre enum
+     */
     public Genre getGenre() {
         return genre;
     }
     
+    /**
+     * Getter method for releaseDate field
+     * @return Date object
+     */
     public Date getReleaseDate() {
         return releaseDate;
     }
     
+    /**
+     * Getter method for isAvailable field
+     * @return boolean
+     */
     public boolean getAvailable() {
         return isAvailable;
+    }
+    
+    /**
+     * Setter method for isAvailable field
+     * @param boolean
+     */
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
     
     //TODO: remove this temporary testbed
