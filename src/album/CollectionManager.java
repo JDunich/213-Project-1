@@ -5,11 +5,13 @@ import java.util.StringTokenizer;
 
 /**
  * This is a class handles the I/O for the user
- * @author Jack Funich
- *
+ * @author Jack Dunich, Kiana Perst
  */
 public class CollectionManager {
-    //reads the command line and runs line based on isValid()
+    
+    /**
+     * Reads the command line and runs line based on isValid()
+     */
     public void run(){
         Scanner sc = new Scanner(System.in);
         while(true){
@@ -20,12 +22,17 @@ public class CollectionManager {
             if(command == "A" && !getValidDate(input)){System.out.println("Invalid Date!");}
             if(isPrintCommand(command)){task(command, null);}
             else{
-            Album album = createAlbum(input);
-            task(command, album);
+                Album album = createAlbum(input);
+                task(command, album);
             }
         }
     }
-    //creates an Album object
+    
+    /**
+     * Creates an Album object
+     * @param input from command line
+     * @return new album object
+     */
     public Album createAlbum(StringTokenizer input){
         String title = input.nextToken();
         String artist = input.nextToken();
@@ -34,12 +41,22 @@ public class CollectionManager {
         Album temp = new Album(title, artist, genre, releaseDate);
         return temp;
     }
-
+    
+    /**
+     * Checks to see if a command is a print command
+     * @param String
+     * @return true if the command matches a valid print command,
+     *          false if it does not
+     */
     public boolean isPrintCommand(String command){
         if(command.matches("P|PD|PG")){return true;}
         return false;
     }
 
+    /**
+     * Creates a collection array and executes a command
+     * @param String command, album
+     */
     public void task(String command, Album album){
         Collection arr = new Collection();
         if(command == "A"){
@@ -68,14 +85,25 @@ public class CollectionManager {
     }
 
 
-    //Checks if the command is valid
+    /**
+     * Checks if the command is valid
+     * @param String input
+     * @return true if the command is one of the listed valid commands,
+     *          false if it is not
+     */
     public boolean isValid(String input){
         StringTokenizer temp = new StringTokenizer(input, ",");
         String ptr = temp.nextToken();
         if(!ptr.matches("A|D|L|R|P|PD|PG|Q")){return false;}
         return true;
     }
-
+    
+    /**
+     * Checks if the Date is valid by implementing the isValid method
+     * @param String input
+     * @return true if the date string is a valid date,
+     *          false if it is not
+     */
     public boolean getValidDate(StringTokenizer input){
         String ptr = null;
             for(int i = 0; i < 5; i++){

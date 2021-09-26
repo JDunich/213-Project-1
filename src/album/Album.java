@@ -1,9 +1,9 @@
 package album;
-import java.util.Scanner; //TODO: REMOVE THIS IT IS NOT ALLOWED IN FINAL CODE
 
 /**
- * This class defines the abstract data type that models an album in a collection of albums
- * @author Kiana Perst
+ * This class defines the abstract data type that models an 
+ * album in a collection of albums
+ * @author Kiana Perst, Jack Dunich
  */
 public class Album {
     private String title;
@@ -25,7 +25,7 @@ public class Album {
     
     /** 
      * Constructor that creates an Album object
-     * @param title, artist, genre, releaseDate
+     * @param String album_title, String artist, enum Genre genre, Date releaseDate
      */
     public Album(String title, String artist, Genre genre, Date releaseDate) {
         
@@ -37,7 +37,11 @@ public class Album {
         
     }
     
-    //Determines if two albums are equal based on the title and artist
+    /**
+     * Determines if two albums are equal based on the title and artist
+     * @param Object which will be cast into an abstract Album object
+     * @return true if both the title and artist fields are equal
+     */
     @Override
     public boolean equals(Object obj) {
         if ((title == ((Album)obj).getTitle()) && (artist == ((Album)obj).getArtist())) {
@@ -46,7 +50,11 @@ public class Album {
         return false;
     }
     
-    //TODO: Finish this method after you do Date class
+    /**
+     * This method prints out the textual representation of an album in the form:
+     * "title::artist::genre::releaseDate::isAvailable"
+     * @return String that lists all the fields of the Album object
+     */
     @Override
     public String toString(){
         String result;
@@ -66,62 +74,51 @@ public class Album {
     }
     
     /**
-     * Getter method for title field
-     * @return string
+     * Accessor method for title field
+     * @return String title
      */
     public String getTitle() {
         return title;
     }
     
     /**
-     * Getter method for artist field
-     * @return string
+     * Accessor method for artist field
+     * @return String artist
      */
     public String getArtist() {
         return artist;
     }
     
     /**
-     * Getter method for genre field
-     * @return genre enum
+     * Accessor method for genre field
+     * @return Genre enum
      */
     public Genre getGenre() {
         return genre;
     }
     
     /**
-     * Getter method for releaseDate field
-     * @return Date object
+     * Accessor method for releaseDate field
+     * @return Date releaseDate
      */
     public Date getReleaseDate() {
         return releaseDate;
     }
     
     /**
-     * Getter method for isAvailable field
-     * @return boolean
+     * Accessor method for isAvailable field
+     * @return boolean isAvailable
      */
     public boolean getAvailable() {
         return isAvailable;
     }
     
     /**
-     * Setter method for isAvailable field
-     * @param boolean
+     * Mutator method for isAvailable field
+     * @param boolean isAvailable
      */
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
     
-    //TODO: remove this temporary testbed
-    public static void main(String[] args) {
-        Album ABC = new Album();
-        Date ok = new Date();
-        Album DEF = new Album("d", "e", Genre.Unknown, ok);
-        
-        System.out.println(ABC.isAvailable);
-        System.out.println(DEF.isAvailable);
-        System.out.println(ABC.isAvailable);
-        System.out.println(DEF.toString());
-    }
 }

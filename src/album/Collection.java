@@ -1,20 +1,20 @@
 package album;
-/**
- *
- */
 
 /**
  * This class defines the array list data structure to hold the album
  * collection and provide the operations to manage the collection
  *
- * @author Jack Dunich
- *
+ * @author Jack Dunich, Kiana Perst
  */
 public class Collection {
     private Album[] albums;
     private int numAlbums; //number of albums currently in the collection
 
-    //find the album index, or return NOT_FOUND
+    /**
+     * Find the album index
+     * @param album
+     * @return int index or -1 if not found
+     */
     private int find(Album album) {
         int i;
         for(i = 0; i < albums.length; i++){
@@ -25,24 +25,38 @@ public class Collection {
         return -1;
     }
 
-    //increase the capacity of the array list by 4
+    /**
+     * Increase the capacity of the array list by 4
+     */
     private void grow() {
         Album[] temp = copyOver(albums, 4);
         numAlbums += 4;
         albums = temp;
     }
 
-    //adds album to the array list
+    /**
+     * Adds album to the array list
+     * @param album
+     * @return true if the album is added, false if the album already exists in the list
+     */
     public boolean add(Album album) {
-        if (find(album) == -1){return false;}
-        Album[] temp = copyOver(albums, 1);
-        temp[numAlbums] = album;
-        numAlbums++;
-        albums = temp;
-        return true;
+        if (find(album) == -1){
+            Album[] temp = copyOver(albums, 1);
+            temp[numAlbums] = album;
+            numAlbums++;
+            albums = temp;
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
-    //removes album and keeps the same order
+    /**
+     * Removes album and keeps the same order
+     * @param album
+     * @return true if it the album is removed, and false if the album is not in the list
+     */
     public boolean remove(Album album) {
         int i = find(album);
         if (i == -1){return false;}
@@ -57,29 +71,43 @@ public class Collection {
         return true;
     }
 
-    //set to not available //TODO: isAvailible constructor
+    /**
+     * Set to not available 
+     * @param album
+     * @return true if the getAvailable field is changed to false,
+     *          false if it is not in the list or the field is already false
+     */
     public boolean lendingOut(Album album) {
         int i;
         for (i = 0; i < albums.length; i++){
-            if (albums[i] == album && albums[i].getAvailable()){
+            if ((albums[i].equals(album)) && albums[i].getAvailable()){
+                albums[i].setAvailable(false);
                 return true;
             }
         }
         return false;
     }
 
-    //set to available //TODO: isAvailible getter
+    /**
+     * Set to available
+     * @param album
+     * @return true if the getAvailable field is changed to true,
+     *          false if it is not in the list or the field is already true
+     */
     public boolean returnAlbum(Album album) {
         int i;
         for (i = 0; i < albums.length; i++){
             if (albums[i] == album && !albums[i].getAvailable()){
+                albums[i].setAvailable(true);
                 return true;
             }
         }
         return false;
     }
 
-    //display the list without specifying the order
+    /**
+     * Display the list without specifying the order
+     */
     public void print() {
         if (albums == null){
             System.out.println("The collection is empty!");
@@ -92,7 +120,9 @@ public class Collection {
         }
     }
 
-    //Prints by release date
+    /**
+     * Prints by release date
+     */
     public void printByReleaseDate() {
         if (albums == null){
             System.out.println("The collection is empty!");
@@ -106,7 +136,9 @@ public class Collection {
         }
     }
 
-    //Prints by genre
+    /**
+     * Prints by genre
+     */
     public void printByGenre() {
         if (albums == null){
             System.out.println("The collection is empty!");
@@ -120,7 +152,11 @@ public class Collection {
         }
     }
 
-    //Copies the Album list and extends by n
+    /**
+     * Copies the Album list and extends by n, alternative to the grow() method
+     * @param album, num to extend the list
+     * @return new Album array
+     */
     public Album[] copyOver(Album[] album, int num){
         Album[] arr = new Album[album.length];
         int i;
@@ -133,7 +169,11 @@ public class Collection {
         return arr;
     }
 
-    //Orders the album list by Date//TODO: getter for releaseDate
+    /**
+     * Orders the album list by Date //TODO: finish this method
+     * @param album
+     * @return edited album
+     */
     public Album[] inOrderDate(Album[] album){
         int n = album.length;
         for (int i = 0; i < n; i++){
@@ -149,7 +189,11 @@ public class Collection {
         return album;
     }
 
-    //Orders the album list by Genre //TODO: getter for genre
+    /**
+     * Orders the album list by Genre
+     * @param album
+     * @return edited album
+     */
     public Album[] inOrderGenre(Album[] album){
         int n = album.length;
         for (int i = 1; i < n; i++){

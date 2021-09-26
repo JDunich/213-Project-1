@@ -3,12 +3,35 @@ import java.util.Calendar;
 
 /**
  * This class defines the Date abstract data type with year, month, and day
- * @author Kiana Perst
+ * @author Kiana Perst, Jack Dunich
  */
 public class Date implements Comparable<Date> {
     private int year;
     private int month;
     private int day;
+    
+    private static final int THE_EIGHTYS = 1980;
+    private static final int QUADRENNIAL = 4;
+    private static final int CENTENNIAL = 100;
+    private static final int QUATERCENTENNIAL = 400;
+    
+    private static final int JANUARY = 1;
+    private static final int FEBRUARY = 2;
+    private static final int MARCH = 3;
+    private static final int APRIL = 4;
+    private static final int MAY = 5;
+    private static final int JUNE = 6;
+    private static final int JULY = 7;
+    private static final int AUGUST = 8;
+    private static final int SEPTEMBER = 9;
+    private static final int OCTOBER = 10;
+    private static final int NOVEMBER = 11;
+    private static final int DECEMBER = 12;
+    
+    private static final int THIRTY_ONE_DAYS = 31;
+    private static final int THIRTY_DAYS = 30;
+    private static final int TWENTY_NINE_DAYS = 29;
+    private static final int TWENTY_EIGHT_DAYS = 28;
     
     /** 
      * Constructor that takes a string in the form of "mm/dd/yyyy" and creates a Date object
@@ -54,15 +77,10 @@ public class Date implements Comparable<Date> {
      */
     public boolean isValid() {
         
-        final int THE_EIGHTYS = 1980;
-        final int QUADRENNIAL = 4;
-        final int CENTENNIAL = 100;
-        final int QUATERCENTENNIAL = 400;
-        
         Date curr_date = new Date();
         int max_days = 0;
         
-        //check if the year is invalid
+        //check if the year is invalid (before 1980 or past the current year)
         if((year < THE_EIGHTYS) || (year > curr_date.year)) {
             return false;  
         }
@@ -81,31 +99,31 @@ public class Date implements Comparable<Date> {
         
         //using the month, determine the max amount of days that should be in that month
         switch (month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                max_days = 31;
+            case JANUARY:
+            case MARCH:
+            case MAY:
+            case JULY:
+            case AUGUST:
+            case OCTOBER:
+            case DECEMBER:
+                max_days = THIRTY_ONE_DAYS;
                 break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                max_days = 30;
+            case APRIL:
+            case JUNE:
+            case SEPTEMBER:
+            case NOVEMBER:
+                max_days = THIRTY_DAYS;
                 break;
-            case 2:
+            case FEBRUARY:
                 if((year % QUADRENNIAL) != 0) {
                     if ((year % CENTENNIAL) != 0) {
                         if((year % QUATERCENTENNIAL) != 0) {
-                            max_days = 29;
+                            max_days = TWENTY_NINE_DAYS;
                             break;
                         }
                     }
                 }
-                max_days = 28;
+                max_days = TWENTY_EIGHT_DAYS;
             default:
                 return false;
         }
@@ -162,23 +180,33 @@ public class Date implements Comparable<Date> {
         
     }
     
-    //Returns the day of the Date object
+    /** 
+     * Accessor method for the day field
+     * @return int day of the month
+     */
     public int getDay() { 
         return day; 
     }
     
-    //Returns the month of the Date object
+    /**
+     * Accessor method for the month field
+     * @return int month
+     */
     public int getMonth() {
         return month;
     }
     
-    //Returns the year of the Date object
+    /**
+     * Accessor method for the year field
+     * @return int year
+     */
     public int getYear() {
         return year;
     }
     
     /**
-     * This method returns a Date object back into a string
+     * This helper method returns a Date object back into a string in the form:
+     * "mm/dd/yyyy"
      * @return string
      */
     public String dateToString(){
@@ -191,24 +219,46 @@ public class Date implements Comparable<Date> {
         return result;
     }
     
-    // Testbed main for the Date class
+    /** 
+     * Testbed main for the Date class
+     */
     public static void main(String[] args) {
         
-        //tests date creation
-        Date date = new Date("11/31/1980");
-        Date date2 = new Date();
-        Date date3 = new Date("9/23/2021");
-        Date date4 = new Date("9/23/1981");
-        System.out.println(date.isValid());
-        System.out.println(date2.isValid());
-        System.out.println(date3.isValid());
-        System.out.println(date4.isValid());
+        //tests date with a year before 1980
+        Date date = new Date("3/4/1979");
+        boolean expectedResult = false;
+        boolean actualResult = date.isValid();
+        System.out.print("Test case 1: ");
+        if(actualResult == expectedResult) {
+            System.out.print("Correct");  
+        }
+        else {
+            System.out.print("Fail");
+        }
         
+        //test case 2 tests a date with an invalid month
+        date = new Date("0/12/2000");
+        expectedResult = false;
+        actualResult = date.isValid();
+        System.out.print("Test case 2: ");
+        if(actualResult == expectedResult) {
+            System.out.print("Correct");  
+        }
+        else {
+            System.out.print("Fail");
+        }
         
-        
-        System.out.println(date.getDay());
-        System.out.print(date.getMonth());
-        System.out.print(date.getYear());
+      //test case 3 tests a date with an invalid day
+        date = new Date("0/12/2000");
+        expectedResult = false;
+        actualResult = date.isValid();
+        System.out.print("Test case 2: ");
+        if(actualResult == expectedResult) {
+            System.out.print("Correct");  
+        }
+        else {
+            System.out.print("Fail");
+        }
         
     }
 
