@@ -283,131 +283,129 @@ public class Date implements Comparable<Date> {
      */
     public static void main(String[] args) {
 
+        boolean result;
+        
         //tests date with invalid format
-        //tests date with invalid leap year
-        //tests date with valid leap year
+        System.out.println("Test case #1: ");
+        Date date = new Date("2001/9/28");
+        result = date.isValid();
+        if (!result) {
+            System.out.println("Date: " + date.dateToString() + ". Failed! Please input the date using the correct format: MM/DD/YYYY");
+        }
+        else {
+            System.out.println("Date: " + date.dateToString() + ". Passed! You used the correct format: MM/DD/YYYY");
+        }
+        
+        //tests date with invalid month
+        System.out.println("Test case #2: ");
+        Date date2 = new Date("14/15/2003");
+        result = date2.isValid();
+        if (!result) {
+            System.out.println("Date: " + date2.dateToString() + ". Failed! " + date2.getMonth() + " is not a valid month.");
+        }
+        else {
+            System.out.println("Date: "+ date2.dateToString() + ". Passed! You used the correct format: MM/DD/YYYY");
+        }
+        
         //tests date with a year before 1980
-        //tests date with year 1980
+        System.out.println("Test case #3: ");
+        Date date3 = new Date("3/20/1979");
+        result = date3.isValid();
+        if (!result) {
+            System.out.println("Date: " + date3.dateToString() + ". Failed! " + date3.getYear() + " occurs before 1980. It is not a valid year.");
+        }
+        else {
+            System.out.println("Date: "+ date3.dateToString() + ". Passed! You entered a valid year.");
+        }
+        
         //tests date with date with day past current date
-        //tests date with correct 31 days
-        //tests date with incorrect 31 days
+        System.out.println("Test case #4: ");
+        Date date4 = new Date("12/20/2021");
+        result = date4.isValid();
+        if (!result) {
+            System.out.println("Date: " + date4.dateToString() + ". Failed! The date you entered is past the current date.");
+        }
+        else {
+            System.out.println("Date: "+ date4.dateToString() + ". Passed! You entered a valid date.");
+        }
+        
+        //tests date with invalid leap year
+        System.out.println("Test case #5: ");
+        Date date5 = new Date("2/29/2018");
+        result = date5.isValid();
+        if (!result) {
+            System.out.println("Date: " + date5.dateToString() + ". Failed! The day you entered exceeded 28 and the year is not a leap year.");
+        }
+        else {
+            System.out.println("Date: "+ date5.dateToString() + ". Passed! You entered a valid date.");
+        }
+        
+        //tests date with valid leap year and valid day
+        System.out.println("Test case #6: ");
+        Date date6 = new Date("2/29/2004");
+        result = date6.isValid();
+        if (result) {
+            System.out.println("Date: " + date6.dateToString() + ". Passed! The day you entered was 29 and the year is a valid leap year.");
+        }
+        else {
+            System.out.println("Date: "+ date6.dateToString() + ". Failed! You entered an invalid date.");
+        }
+        
+        //tests date with valid leap year and invalid day
+        System.out.println("Test case #7: ");
+        Date date7 = new Date("2/30/2008");
+        result = date7.isValid();
+        if (!result) {
+            System.out.println("Date: " + date7.dateToString() + ". Failed! The month you entered cannot exceeded 29 days, even if its a valid leap year.");
+        }
+        else {
+            System.out.println("Date: "+ date7.dateToString() + ". Passed! You entered a valid date.");
+        }
+        
         //tests date with correct 30 days
-        //tests date with incorrect 30 days
-        //tests date with incorrect 28 days
-        //tests date with correct 28 days
-        Date date = new Date("3/4/1979");
-        boolean expectedResult = false;
-        boolean actualResult = date.isValid();
-        System.out.print("Test case 1: ");
-        if (actualResult == expectedResult) {
-            System.out.print("Correct");
-        } else {
-            System.out.print("Fail");
+        System.out.println("Test case #8: ");
+        Date date8 = new Date("4/30/1999");
+        result = date8.isValid();
+        if (result) {
+            System.out.println("Date: " + date8.dateToString() + ". Passed! The day you entered was 30 and the month you entered has a max of 30 days.");
         }
-
-        //test case 2 tests a date with an invalid month
-        date = new Date("0/12/2000");
-        expectedResult = false;
-        actualResult = date.isValid();
-        System.out.print("Test case 2: ");
-        if (actualResult == expectedResult) {
-            System.out.print("Correct");
-        } else {
-            System.out.print("Fail");
+        else {
+            System.out.println("Date: "+ date8.dateToString() + ". Failed! The month you entered cannot have 30 days.");
         }
-
-        //test case 3 tests a date with an invalid day
-        date = new Date("10/32/2000");
-        expectedResult = false;
-        actualResult = date.isValid();
-        System.out.print("Test case 2: ");
-        if (actualResult == expectedResult) {
-            System.out.print("Correct");
-        } else {
-            System.out.print("Fail");
+        
+        //tests date with incorrect 31 days
+        System.out.println("Test case #9: ");
+        Date date9 = new Date("9/31/1984");
+        result = date9.isValid();
+        if (!result) {
+            System.out.println("Date: " + date9.dateToString() + ". Failed! The month you entered cannot exceeded 30 days.");
         }
-
-        System.out.println("Running test case #1");
-        Date date2 = new Date("31/4/2000");
-        Boolean Result = date2.isValid();
-        if (!Result) {
-            System.out.println("Test case #1, checking the correct format. Passed! The correct format is MM/DD/YYYY");
-        } else {
-            System.out.println("Test case #1, checking for the correct format. Failed!");
+        else {
+            System.out.println("Date: "+ date9.dateToString() + ". Passed! You entered a valid date.");
         }
-        System.out.println("Running test case #2");
-        Date date3 = new Date("2/29/2000");
-        Boolean Result2 = date3.isValid();
-        if (Result2) {
-            System.out.println("Test case #2, checking for the correct leap year. Passed! 2000 is a leap year");
-        } else {
-            System.out.println("Test case #2, checking for the correct format. Failed!");
+        
+        //tests date with correct 31 days
+        System.out.println("Test case #10: ");
+        Date date10 = new Date("1/31/2019");
+        result = date10.isValid();
+        if (result) {
+            System.out.println("Date: " + date10.dateToString() + ". Passed! The day you entered was 31 and the month you entered has a max of 31 days.");
         }
-        System.out.println("Running test case #3");
-        Date date4 = new Date("3/2/1979");
-        Boolean Result3 = date4.isValid();
-        if (!Result3) {
-            System.out.println("Test case #3, checking for the correct year before 1980. Passed! 1979 is before 1980");
-        } else {
-            System.out.println("Test case #3, checking for the correct year before 1980. Failed!");
+        else {
+            System.out.println("Date: "+ date10.dateToString() + ". Failed! The month you entered cannot have 31 days.");
         }
-        System.out.println("Running test case #4");
-        Date date5 = new Date("9/2/1981");
-        Boolean Result4 = date5.isValid();
-        if (Result4) {
-            System.out.println("Test case #4, checking for the correct year after 1980. Passed!");
-        } else {
-            System.out.println("Test case #4, checking for the correct year after 1980. Failed!");
+        
+        //tests date with invalid days
+        System.out.println("Test case #11: ");
+        Date date11 = new Date("8/32/2011");
+        result = date11.isValid();
+        if (!result) {
+            System.out.println("Date: " + date11.dateToString() + ". Failed! Months cannot exceeded 31 days.");
         }
-        System.out.println("Running test case #5");
-        Date date6 = new Date("8/3/2021");
-        Boolean Result5 = date6.isValid();
-        if (!Result5) {
-            System.out.println("Test case #5, checking for the date after today. Passed!");
-        } else {
-            System.out.println("Test case #5, checking for the date after today. Failed!");
+        else {
+            System.out.println("Date: "+ date11.dateToString() + ". Passed! You entered a valid date.");
         }
-        System.out.println("Running test case #6");
-        Date date7 = new Date("9/28/2015");
-        Boolean Result6 = date7.isValid();
-        if (Result6) {
-            System.out.println("Test case #6, checking for just a normal date. Passed!");
-        } else {
-            System.out.println("Test case #6, checking for just a normal date. Failed!");
-        }
-        System.out.println("Running test case #7");
-        Date date8 = new Date("2/29/2016");
-        Boolean Result7 = date8.isValid();
-        if (Result7) {
-            System.out.println("Test case #7, checking for the correct leap year. Passed! 2016 is a leap year");
-        } else {
-            System.out.println("Test case #7, checking for the correct leap year. Failed!");
-        }
-        System.out.println("Running test case #8");
-        Date date9 = new Date("2/29/2001");
-        Boolean Result8 = date9.isValid();
-        if (!Result8) {
-            System.out.println("Test case #8, checking for the correct leap year. Passed! 2001 is not a leap year");
-        } else {
-            System.out.println("Test case #8, checking for the correct leap year. Failed!");
-        }
-        System.out.println("Running test case #9");
-        Date date10 = new Date("4/31/2012");
-        Boolean Result9 = date10.isValid();
-        if (!Result9) {
-            System.out.println("Test case #9, checking for the correct number of days in April. Passed! There are only 30 days");
-        } else {
-            System.out.println("Test case #9, checking for the correct number of days in April. Failed!");
-        }
-        System.out.println("Running test case #10");
-        Date date11 = new Date("2/29/1984");
-        Boolean Result10 = date11.isValid();
-        if (!Result10) {
-            System.out.println("Test case #10, checking for the correct leap year. Passed! 1984 is a leap year");
-        } else {
-            System.out.println("Test case #10, checking for the correct leap year. Failed!");
-        }
-
+        
     }
 
 }
