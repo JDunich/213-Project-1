@@ -17,7 +17,10 @@ public class Collection {
      */
     private int find(Album album) {
         int i;
-        for(i = 0; i < albums.length; i++){
+        if(numAlbums == 0) {
+            albumStart();
+        }
+        for(i = 0; i < numAlbums; i++){
             if(albums[i].equals(album)){
                     return i;
             }
@@ -31,7 +34,7 @@ public class Collection {
     private void grow() {
         Album[] arr = new Album[albums.length + 4];
         int i;
-        for (i = 0; i < albums.length; i++){
+        for (i = 0; i < numAlbums; i++){
             arr[i] = albums[i];
         }
 
@@ -44,7 +47,7 @@ public class Collection {
      * @return true if the album is added, false if the album already exists in the list
      */
     public boolean add(Album album) {
-        if (find(album) != -1) {
+        if (find(album) == -1) {
             int length = albums.length;
             if(albums[length-1] == null){grow();}
             albums[numAlbums] = album;
@@ -67,9 +70,10 @@ public class Collection {
         for (j = 0; j < i; j++){
             temp[j] = albums[j];
         }
-        for (i = i+1; i < albums.length - 1; i++){
-            temp[i-1] = albums[i+1];
+        for (i = i+1; i < numAlbums; i++){
+            temp[i-1] = albums[i];
         }
+        albums = temp;
         numAlbums--;
         return true;
     }
@@ -82,7 +86,7 @@ public class Collection {
      */
     public boolean lendingOut(Album album) {
         int i;
-        for (i = 0; i < albums.length; i++){
+        for (i = 0; i < numAlbums; i++){
             if ((albums[i].equals(album)) && albums[i].getAvailable()){
                 albums[i].setAvailable(false);
                 return true;
@@ -99,8 +103,8 @@ public class Collection {
      */
     public boolean returnAlbum(Album album) {
         int i;
-        for (i = 0; i < albums.length; i++){
-            if (albums[i] == album && !albums[i].getAvailable()){
+        for (i = 0; i < numAlbums; i++){
+            if (albums[i].equals(album) && !albums[i].getAvailable()){
                 albums[i].setAvailable(true);
                 return true;
             }
@@ -112,7 +116,7 @@ public class Collection {
      * Display the list without specifying the order
      */
     public void print() {
-        if (albums == null){
+        if (numAlbums == 0){
             System.out.println("The collection is empty!");
         }else {
             System.out.println("*List of albums in the collection.");
@@ -127,7 +131,7 @@ public class Collection {
      * Prints by release date
      */
     public void printByReleaseDate() {
-        if (albums == null){
+        if (numAlbums == 0){
             System.out.println("The collection is empty!");
         }else {
             Album[] temp = inOrderDate(albums);
@@ -143,7 +147,7 @@ public class Collection {
      * Prints by genre
      */
     public void printByGenre() {
-        if (albums == null){
+        if (numAlbums == 0){
             System.out.println("The collection is empty!");
         }else {
             Album[] temp = inOrderGenre(albums);
@@ -194,6 +198,14 @@ public class Collection {
             album[j + 1] =  key;
         }
         return album;
+    }
+    
+    /**
+     * Initializes album
+     */
+    public void albumStart(){
+        Album[] temp = new Album[1];
+        albums = temp;
     }
 
 }

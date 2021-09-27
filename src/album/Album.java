@@ -37,6 +37,17 @@ public class Album {
         
     }
     
+    /** 
+     * Constructor that creates an Album object with limited parameters
+     * @param String album_title, String artist
+     */
+    public Album(String title, String artist) {
+        
+        this.title = title;
+        this.artist = artist;
+        isAvailable = false;
+    }
+    
     /**
      * Determines if two albums are equal based on the title and artist
      * @param Object which will be cast into an abstract Album object
@@ -44,7 +55,7 @@ public class Album {
      */
     @Override
     public boolean equals(Object obj) {
-        if ((title == ((Album)obj).getTitle()) && (artist == ((Album)obj).getArtist())) {
+        if ((title.compareTo(((Album)obj).getTitle()) == 0) && (artist.compareTo(((Album)obj).getArtist()) == 0)) {
             return true;
         }
         return false;
@@ -68,8 +79,13 @@ public class Album {
             available_str = "is not available";
         }
         
-        result = title + separator + artist + separator + genre + separator + 
-                releaseDate.dateToString() + separator + available_str;
+        if (genre == null) {
+            result = title + separator + artist;
+        }
+        else {
+            result = title + separator + artist + separator + genre + separator + 
+                    releaseDate.dateToString() + separator + available_str;
+        }
         return result;
     }
     
