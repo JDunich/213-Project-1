@@ -5,6 +5,6 @@ package album;
  * @author Kiana Perst, Jack Dunich
  */
 public enum Genre {
-    Classical, Country, Jazz, Pop, Unknown;
+    Classical, Country, Jazz, Pop, Unknown
 
 }
