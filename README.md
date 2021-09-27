@@ -1,6 +1,6 @@
 # 213-Project-1
 
-## Project Description ##
+## Project Description  ##
 
 You will develop a simple software to manage the information of a collection of albums owned by the user. This
 project uses the IDE console as the user interface and utilizes the Java standard input and output to manage the
