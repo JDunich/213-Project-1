@@ -4,11 +4,18 @@ package album;
  * This class defines the array list data structure to hold the album
  * collection and provide the operations to manage the collection
  *
- * @author Jack Dunich, Kiana Perst
+ * @author Jack Dunich
+ * @author Kiana Perst
  */
 public class Collection {
+    /**
+     * album list
+     */
     private Album[] albums;
-    private int numAlbums; //number of albums currently in the collection
+    /**
+     * number of albums in collection
+     */
+    private int numAlbums;
 
     /**
      * Find the album index or -1 if the album is not in album array

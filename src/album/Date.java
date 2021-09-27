@@ -4,34 +4,104 @@ import java.util.Calendar;
 
 /**
  * This class defines the Date abstract data type with year, month, and day
- * @author Kiana Perst, Jack Dunich
+ * @author Jack Dunich
+ * @author Kiana Perst
  */
 public class Date implements Comparable<Date> {
+    /**
+     * year global variable
+     */
     private final int year;
+    /**
+     * month global variable
+     */
     private final int month;
+    /**
+     * day global variable
+     */
     private final int day;
 
+    /**
+     * constant for the 80s
+     */
     private static final int THE_EIGHTYS = 1980;
+    /**
+     * constant for quadrennial
+     */
     private static final int QUADRENNIAL = 4;
+    /**
+     * constant for centennial
+     */
     private static final int CENTENNIAL = 100;
+    /**
+     * constant for quatercentennial
+     */
     private static final int QUATERCENTENNIAL = 400;
 
+    /**
+     * constant for January
+     */
     private static final int JANUARY = 1;
+    /**
+     * constant for February
+     */
     private static final int FEBRUARY = 2;
+    /**
+     * constant for March
+     */
     private static final int MARCH = 3;
+    /**
+     * constant for April
+     */
     private static final int APRIL = 4;
+    /**
+     * constant for May
+     */
     private static final int MAY = 5;
+    /**
+     * constant for June
+     */
     private static final int JUNE = 6;
+    /**
+     * constant for July
+     */
     private static final int JULY = 7;
+    /**
+     * constant for August
+     */
     private static final int AUGUST = 8;
+    /**
+     * constant for September
+     */
     private static final int SEPTEMBER = 9;
+    /**
+     * constant for October
+     */
     private static final int OCTOBER = 10;
+    /**
+     * constant for November
+     */
     private static final int NOVEMBER = 11;
+    /**
+     * constant for December
+     */
     private static final int DECEMBER = 12;
 
+    /**
+     * constant for 31 days
+     */
     private static final int THIRTY_ONE_DAYS = 31;
+    /**
+     * constant for 30 days
+     */
     private static final int THIRTY_DAYS = 30;
+    /**
+     * constant for 29 days
+     */
     private static final int TWENTY_NINE_DAYS = 29;
+    /**
+     * constant for 28 days
+     */
     private static final int TWENTY_EIGHT_DAYS = 28;
 
     /**
@@ -209,6 +279,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Testbed main for the Date class
+     * @param args argument
      */
     public static void main(String[] args) {
 

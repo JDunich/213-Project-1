@@ -6,10 +6,13 @@ import java.util.StringTokenizer;
 /**
  * This is a class handles the I/O for the user
  *
- * @author Jack Dunich, Kiana Perst
+ * @author Jack Dunich
+ * @author Kiana Perst
  */
 public class CollectionManager {
-
+    /**
+     * new collection object
+     */
     Collection arr = new Collection();
 
     /**

@@ -3,13 +3,29 @@ package album;
 /**
  * This class defines the abstract data type that models an
  * album in a collection of albums
- * @author Kiana Perst, Jack Dunich
+ * @author Jack Dunich
+ * @author Kiana Perst
  */
 public class Album {
+    /**
+     * title of album
+     */
     private final String title;
+    /**
+     * artist of album
+     */
     private final String artist;
+    /**
+     * genre of album
+     */
     private Genre genre; //enum class: Classical, Country, Jazz, Pop, Unknown
+    /**
+     * release date of album
+     */
     private Date releaseDate;
+    /**
+     * album availability
+     */
     private boolean isAvailable;
 
     /**
