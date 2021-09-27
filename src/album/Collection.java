@@ -60,7 +60,7 @@ public class Collection {
     /**
      * Removes album and keeps the same order
      * @param album
-     * @return true if it the album is removed, and false if the album is not in the list
+     * @return true if the album is removed, and false if the album is not in the list
      */
     public boolean remove(Album album) {
         int i = find(album);
@@ -134,10 +134,10 @@ public class Collection {
         if (numAlbums == 0){
             System.out.println("The collection is empty!");
         }else {
-            Album[] temp = inOrderDate(albums);
+            inOrderDate();
             System.out.println("*Album collection by release date.");
             for(int i = 0; i < numAlbums; i++){
-                System.out.println(temp[i].toString());
+                System.out.println(albums[i].toString());
             }
             System.out.println("*End of List");
         }
@@ -150,10 +150,10 @@ public class Collection {
         if (numAlbums == 0){
             System.out.println("The collection is empty!");
         }else {
-            Album[] temp = inOrderGenre(albums);
+            inOrderGenre();
             System.out.println("*Album collection by genre.");
             for(int i = 0; i < numAlbums; i++){
-                System.out.println(temp[i].toString());
+                System.out.println(albums[i].toString());
             }
             System.out.println("*End of List");
         }
@@ -165,20 +165,18 @@ public class Collection {
      * @param album
      * @return edited album
      */
-    public Album[] inOrderDate(Album[] album){
+    public void inOrderDate(){
         int n = numAlbums;
         for (int i = 1; i < n; i++){
-            Album key = album[i];
+            Album key = albums[i];
             int j = i - 1;
             Date temp = key.getReleaseDate();
-            int dateCompare = temp.compareTo(album[j].getReleaseDate());
-            while(j >= 0 && dateCompare > 0){
-                album[j + 1] = album[j];
+            while(j >= 0 && temp.compareTo(albums[j].getReleaseDate()) > 0){
+                albums[j + 1] = albums[j];
                 j = j-1;
             }
-            album[j + 1] =  key;
+            albums[j + 1] =  key;
         }
-        return album;
     }
 
     /**
@@ -186,18 +184,17 @@ public class Collection {
      * @param album
      * @return edited album
      */
-    public Album[] inOrderGenre(Album[] album){
+    public void inOrderGenre(){
         int n = numAlbums;
         for (int i = 1; i < n; i++){
-            Album key = album[i];
+            Album key = albums[i];
             int j = i - 1;
-            while(j >= 0 && album[j].getGenre().ordinal() > key.getGenre().ordinal()){
-                album[j + 1] = album[j];
+            while(j >= 0 && albums[j].getGenre().ordinal() > key.getGenre().ordinal()){
+                albums[j + 1] = albums[j];
                 j = j-1;
             }
-            album[j + 1] =  key;
+            albums[j + 1] =  key;
         }
-        return album;
     }
     
     /**

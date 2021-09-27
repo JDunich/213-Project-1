@@ -23,11 +23,14 @@ public class CollectionManager {
             if(!isValid(s)){System.out.println("Invalid command!");}
             else {
                 String command = input.nextToken();
-                if(command == "A" && !getValidDate(input)){System.out.println("Invalid Date!");}
-                if(isPrintCommand(command)){task(command, null);}
-                else{
-                    Album album = createAlbum(input, command);
-                    task(command, album);
+                if(command.equals("A") && !getValidDate(s)){System.out.println("Invalid Date!");}
+                else {
+                    if (isPrintCommand(command)) {
+                        task(command, null);
+                    } else {
+                        Album album = createAlbum(input, command);
+                        task(command, album);
+                    }
                 }
             }
         }
@@ -48,6 +51,7 @@ public class CollectionManager {
         else {
             String genre_string = (input.nextToken()).toLowerCase();
             genre_string = genre_string.substring(0, 1).toUpperCase() + genre_string.substring(1);
+            genre_string = isEnum(genre_string);
             Genre genre = Genre.valueOf(genre_string);
             Date releaseDate = new Date(input.nextToken());
             temp = new Album(title, artist, genre, releaseDate);
@@ -116,7 +120,8 @@ public class CollectionManager {
      * @return true if the date string is a valid date,
      *          false if it is not
      */
-    public boolean getValidDate(StringTokenizer input){
+    public boolean getValidDate(String s){
+        StringTokenizer input = new StringTokenizer(s, ",");
         String ptr = null;
             for(int i = 0; i < 5; i++){
                 ptr = input.nextToken();
@@ -124,6 +129,13 @@ public class CollectionManager {
             Date temp = new Date(ptr);
             if(!temp.isValid()){return false;}
        return true;
+    }
+
+    public String isEnum(String string){
+        if(string.equals("Classical") || string.equals("Country") || string.equals("Jazz") || string.equals("Pop")){
+            return string;
+        }
+        return "Unknown";
     }
 
 }

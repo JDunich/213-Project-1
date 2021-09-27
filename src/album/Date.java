@@ -76,27 +76,26 @@ public class Date implements Comparable<Date> {
      * @return true if the date is valid, false if not
      */
     public boolean isValid() {
-        
+
         Date curr_date = new Date();
         int max_days = 0;
-        
+
         //check if the year is invalid (before 1980 or past the current year)
-        if((year < THE_EIGHTYS) || (year > curr_date.year)) {
-            return false;  
+        if ((year < THE_EIGHTYS) || (year > curr_date.year)) {
+            return false;
         }
-        
+
         //check if the date is beyond the current date
-        if(year == curr_date.year) {
-            if(month > curr_date.month) {
+        if (year == curr_date.year) {
+            if (month > curr_date.month) {
                 return false;
-            }
-            else if(month == curr_date.month) {
-                if(day > curr_date.day) {
+            } else if (month == curr_date.month) {
+                if (day > curr_date.day) {
                     return false;
                 }
             }
         }
-        
+
         //using the month, determine the max amount of days that should be in that month
         switch (month) {
             case JANUARY:
@@ -115,20 +114,18 @@ public class Date implements Comparable<Date> {
                 max_days = THIRTY_DAYS;
                 break;
             case FEBRUARY:
-                if((year % QUADRENNIAL) != 0) {
-                    if ((year % CENTENNIAL) != 0) {
-                        if((year % QUATERCENTENNIAL) != 0) {
-                            max_days = TWENTY_NINE_DAYS;
-                            break;
-                        }
-                    }
+                if ((year % CENTENNIAL == 0 && year % QUATERCENTENNIAL != 0) || (year % QUADRENNIAL == 0)) {
+                    max_days = TWENTY_NINE_DAYS;
+                    break;
+                }else {
+                    max_days = TWENTY_EIGHT_DAYS;
+                    break;
                 }
-                max_days = TWENTY_EIGHT_DAYS;
             default:
                 return false;
         }
         
-        if (max_days <= day) {
+        if (max_days < day) {
             return false;
         }
         else {
