@@ -9,26 +9,21 @@ import java.util.StringTokenizer;
  */
 public class CollectionManager {
     
-    Collection arr = new Collection();
-    
     /**
      * Reads the command line and runs line based on isValid()
      */
     public void run(){
-        System.out.print("Collection Manger starts running.");
         Scanner sc = new Scanner(System.in);
         while(true){
             String s = sc.nextLine();
             StringTokenizer input = new StringTokenizer(s, ",");
             if(!isValid(s)){System.out.println("Invalid command!");}
-            else {
-                String command = input.nextToken();
-                if(command == "A" && !getValidDate(input)){System.out.println("Invalid Date!");}
-                if(isPrintCommand(command)){task(command, null);}
-                else{
-                    Album album = createAlbum(input, command);
-                    task(command, album);
-                }
+            String command = input.nextToken();
+            if(command == "A" && !getValidDate(input)){System.out.println("Invalid Date!");}
+            if(isPrintCommand(command)){task(command, null);}
+            else{
+                Album album = createAlbum(input);
+                task(command, album);
             }
         }
     }
@@ -38,20 +33,12 @@ public class CollectionManager {
      * @param input from command line
      * @return new album object
      */
-    public Album createAlbum(StringTokenizer input, String command){
+    public Album createAlbum(StringTokenizer input){
         String title = input.nextToken();
         String artist = input.nextToken();
-        Album temp;
-        if(command.matches("D|L|R")) {
-            temp = new Album(title, artist);
-        }
-        else {
-            String genre_string = (input.nextToken()).toLowerCase();
-            genre_string = genre_string.substring(0, 1).toUpperCase() + genre_string.substring(1);
-            Genre genre = Genre.valueOf(genre_string);
-            Date releaseDate = new Date(input.nextToken());
-            temp = new Album(title, artist, genre, releaseDate);
-        }
+        Genre genre = Genre.valueOf(input.nextToken());
+        Date releaseDate = new Date(input.nextToken());
+        Album temp = new Album(title, artist, genre, releaseDate);
         return temp;
     }
     
@@ -62,7 +49,7 @@ public class CollectionManager {
      *          false if it does not
      */
     public boolean isPrintCommand(String command){
-        if(command.matches("P|PD|PG|Q")){return true;}
+        if(command.matches("P|PD|PG")){return true;}
         return false;
     }
 
@@ -71,26 +58,27 @@ public class CollectionManager {
      * @param String command, album
      */
     public void task(String command, Album album){
-        if(command.equals("A")){
+        Collection arr = new Collection();
+        if(command == "A"){
             if(arr.add(album)){System.out.println(album + " >> added.");}
             else{System.out.println(album.toString() + " >> is already in the collection.");}
-        }else if(command.equals("D")){
+        }else if(command == "D"){
             if(arr.remove(album)){System.out.println(album + " >> deleted.");}
-            else{System.out.println(album.toString() + " >> is not in the collection.");}
-        }else if(command.equals("L")) {
+            else{System.out.println(album.toString() + " >> is already in the collection.");}
+        }else if(command == "L") {
             if (arr.lendingOut(album)) {
                 System.out.println(album + " >> lending out and set to not available.");
             } else {System.out.println(album.toString() + " >> is not available.");}
-        }else if(command.equals("R")){
+        }else if(command == "R"){
             if(arr.returnAlbum(album)){System.out.println(album + " >> returning and set to available.");}
             else{System.out.println(album.toString() + " >> return cannot be completed.");}
-        }else if(command.equals("P")){
+        }else if(command == "P"){
             arr.print();
-        }else if(command.equals("PD")){
+        }else if(command == "PD"){
             arr.printByReleaseDate();
-        }else if(command.equals("PG")){
+        }else if(command == "PG"){
             arr.printByGenre();
-        }else if(command.equals("Q")){
+        }else if(command == "Q"){
             System.out.println("Collection Manager terminated.");
             System.exit(0);
         }

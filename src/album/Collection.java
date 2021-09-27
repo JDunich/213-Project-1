@@ -161,7 +161,7 @@ public class Collection {
 
 
     /**
-     * Orders the album list by Date //TODO: finish this method
+     * Orders the album list by Date
      * @param album
      * @return edited album
      */
@@ -203,6 +203,11 @@ public class Collection {
     /**
      * Initializes album
      */
+    public void albumStart(){
+        Album[] temp = new Album[1];
+        albums = temp;
+    }
+
     public void albumStart(){
         Album[] temp = new Album[1];
         albums = temp;
