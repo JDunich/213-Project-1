@@ -79,7 +79,7 @@ public class Date implements Comparable<Date> {
     public boolean isValid() {
 
         Date curr_date = new Date();
-        int max_days = 0;
+        int max_days;
 
         //check if the year is invalid (before 1980 or past the current year)
         if ((year < THE_EIGHTYS) || (year > curr_date.year)) {

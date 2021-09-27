@@ -202,8 +202,7 @@ public class Collection {
      * Initializes album
      */
     private void albumStart() {
-        Album[] temp = new Album[1];
-        albums = temp;
+        albums = new Album[1];
     }
 
 }

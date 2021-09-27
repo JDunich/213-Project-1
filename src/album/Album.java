@@ -25,10 +25,10 @@ public class Album {
 
     /**
      * Constructor that creates an Album object
-     * @param title,
-     * @param artist,
-     * @param genre,
-     * @param releaseDate
+     * @param title title album
+     * @param artist artist album
+     * @param genre genre album
+     * @param releaseDate release date album
      */
     public Album(String title, String artist, Genre genre, Date releaseDate) {
 
@@ -42,8 +42,8 @@ public class Album {
 
     /**
      * Constructor that creates an Album object with limited parameters
-     * @param title
-     * @param artist
+     * @param title title album
+     * @param artist artist album
      */
     public Album(String title, String artist) {
 
@@ -130,7 +130,7 @@ public class Album {
 
     /**
      * Mutator method for isAvailable field
-     * @param available
+     * @param available availability of album
      */
     public void setAvailable(boolean available) {
         isAvailable = available;

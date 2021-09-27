@@ -50,7 +50,7 @@ public class CollectionManager {
         String title = input.nextToken();
         String artist = input.nextToken();
         Album temp;
-        if (command.matches("D|L|R")) {
+        if (command.matches("[DLR]")) {
             temp = new Album(title, artist);
         } else {
             String genre_string = (input.nextToken()).toLowerCase();
@@ -81,39 +81,47 @@ public class CollectionManager {
      * @param album album that was created
      */
     private void task(String command, Album album) {
-        if (command.equals("A")) {
-            if (arr.add(album)) {
-                System.out.println(album + " >> added.");
-            } else {
-                System.out.println(album.toString() + " >> is already in the collection.");
-            }
-        } else if (command.equals("D")) {
-            if (arr.remove(album)) {
-                System.out.println(album + " >> deleted.");
-            } else {
-                System.out.println(album.toString() + " >> is not in the collection.");
-            }
-        } else if (command.equals("L")) {
-            if (arr.lendingOut(album)) {
-                System.out.println(album + " >> lending out and set to not available.");
-            } else {
-                System.out.println(album.toString() + " >> is not available.");
-            }
-        } else if (command.equals("R")) {
-            if (arr.returnAlbum(album)) {
-                System.out.println(album + " >> returning and set to available.");
-            } else {
-                System.out.println(album.toString() + " >> return cannot be completed.");
-            }
-        } else if (command.equals("P")) {
-            arr.print();
-        } else if (command.equals("PD")) {
-            arr.printByReleaseDate();
-        } else if (command.equals("PG")) {
-            arr.printByGenre();
-        } else if (command.equals("Q")) {
-            System.out.println("Collection Manager terminated.");
-            System.exit(0);
+        switch (command) {
+            case "A":
+                if (arr.add(album)) {
+                    System.out.println(album + " >> added.");
+                } else {
+                    System.out.println(album.toString() + " >> is already in the collection.");
+                }
+                break;
+            case "D":
+                if (arr.remove(album)) {
+                    System.out.println(album + " >> deleted.");
+                } else {
+                    System.out.println(album.toString() + " >> is not in the collection.");
+                }
+                break;
+            case "L":
+                if (arr.lendingOut(album)) {
+                    System.out.println(album + " >> lending out and set to not available.");
+                } else {
+                    System.out.println(album.toString() + " >> is not available.");
+                }
+                break;
+            case "R":
+                if (arr.returnAlbum(album)) {
+                    System.out.println(album + " >> returning and set to available.");
+                } else {
+                    System.out.println(album.toString() + " >> return cannot be completed.");
+                }
+                break;
+            case "P":
+                arr.print();
+                break;
+            case "PD":
+                arr.printByReleaseDate();
+                break;
+            case "PG":
+                arr.printByGenre();
+                break;
+            case "Q":
+                System.out.println("Collection Manager terminated.");
+                System.exit(0);
         }
     }
 
