@@ -12,7 +12,7 @@ public class Collection {
 
     /**
      * Find the album index
-     * @param album
+     * @param Album album
      * @return int index or -1 if not found
      */
     private int find(Album album) {
@@ -43,7 +43,7 @@ public class Collection {
 
     /**
      * Adds album to the array list
-     * @param album
+     * @param Album album
      * @return true if the album is added, false if the album already exists in the list
      */
     public boolean add(Album album) {
@@ -59,7 +59,7 @@ public class Collection {
 
     /**
      * Removes album and keeps the same order
-     * @param album
+     * @param Albumn album
      * @return true if the album is removed, and false if the album is not in the list
      */
     public boolean remove(Album album) {
@@ -80,7 +80,7 @@ public class Collection {
 
     /**
      * Set to not available 
-     * @param album
+     * @param Album album
      * @return true if the getAvailable field is changed to false,
      *          false if it is not in the list or the field is already false
      */
@@ -97,7 +97,7 @@ public class Collection {
 
     /**
      * Set to available
-     * @param album
+     * @param Album album
      * @return true if the getAvailable field is changed to true,
      *          false if it is not in the list or the field is already true
      */
@@ -161,9 +161,7 @@ public class Collection {
 
 
     /**
-     * Orders the album list by Date //TODO: finish this method
-     * @param album
-     * @return edited album
+     * Orders the album list by Date
      */
     public void inOrderDate(){
         int n = numAlbums;
@@ -181,8 +179,6 @@ public class Collection {
 
     /**
      * Orders the album list by Genre
-     * @param album
-     * @return edited album
      */
     public void inOrderGenre(){
         int n = numAlbums;

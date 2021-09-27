@@ -37,8 +37,8 @@ public class CollectionManager {
     }
     
     /**
-     * Creates an Album object
-     * @param input from command line
+     * Creates an Album object based on given command line input where input contains the Album details and command contains the command
+     * @param StringTokenizer input, String Command
      * @return new album object
      */
     public Album createAlbum(StringTokenizer input, String command){
@@ -61,7 +61,7 @@ public class CollectionManager {
     
     /**
      * Checks to see if a command is a print command
-     * @param String
+     * @param String command
      * @return true if the command matches a valid print command,
      *          false if it does not
      */
@@ -72,7 +72,7 @@ public class CollectionManager {
 
     /**
      * Creates a collection array and executes a command
-     * @param String command, album
+     * @param String command, Album album
      */
     public void task(String command, Album album){
         if(command.equals("A")){
@@ -131,6 +131,11 @@ public class CollectionManager {
        return true;
     }
 
+    /**
+     * Checks if the string is a defined enum
+     * @param String String
+     * @return string if is enum or Unknown if not defined enum
+     */
     public String isEnum(String string){
         if(string.equals("Classical") || string.equals("Country") || string.equals("Jazz") || string.equals("Pop")){
             return string;
