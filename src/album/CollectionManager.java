@@ -41,7 +41,7 @@ public class CollectionManager {
      * @param StringTokenizer input, String Command
      * @return new album object
      */
-    public Album createAlbum(StringTokenizer input, String command){
+    private Album createAlbum(StringTokenizer input, String command){
         String title = input.nextToken();
         String artist = input.nextToken();
         Album temp;
@@ -65,7 +65,7 @@ public class CollectionManager {
      * @return true if the command matches a valid print command,
      *          false if it does not
      */
-    public boolean isPrintCommand(String command){
+    private boolean isPrintCommand(String command){
         if(command.matches("P|PD|PG|Q")){return true;}
         return false;
     }
@@ -74,7 +74,7 @@ public class CollectionManager {
      * Creates a collection array and executes a command
      * @param String command, Album album
      */
-    public void task(String command, Album album){
+    private void task(String command, Album album){
         if(command.equals("A")){
             if(arr.add(album)){System.out.println(album + " >> added.");}
             else{System.out.println(album.toString() + " >> is already in the collection.");}
@@ -107,7 +107,7 @@ public class CollectionManager {
      * @return true if the command is one of the listed valid commands,
      *          false if it is not
      */
-    public boolean isValid(String input){
+    private boolean isValid(String input){
         StringTokenizer temp = new StringTokenizer(input, ",");
         String ptr = temp.nextToken();
         if(!ptr.matches("A|D|L|R|P|PD|PG|Q")){return false;}
@@ -120,7 +120,7 @@ public class CollectionManager {
      * @return true if the date string is a valid date,
      *          false if it is not
      */
-    public boolean getValidDate(String s){
+    private boolean getValidDate(String s){
         StringTokenizer input = new StringTokenizer(s, ",");
         String ptr = null;
             for(int i = 0; i < 5; i++){
@@ -136,7 +136,7 @@ public class CollectionManager {
      * @param String String
      * @return string if is enum or Unknown if not defined enum
      */
-    public String isEnum(String string){
+    private String isEnum(String string){
         if(string.equals("Classical") || string.equals("Country") || string.equals("Jazz") || string.equals("Pop")){
             return string;
         }

@@ -11,7 +11,7 @@ public class Collection {
     private int numAlbums; //number of albums currently in the collection
 
     /**
-     * Find the album index
+     * Find the album index or -1 if the album is not in album array
      * @param Album album
      * @return int index or -1 if not found
      */
@@ -42,7 +42,7 @@ public class Collection {
     }
 
     /**
-     * Adds album to the array list
+     * Adds album to the array list if it does not already exist in array list
      * @param Album album
      * @return true if the album is added, false if the album already exists in the list
      */
@@ -58,7 +58,7 @@ public class Collection {
     }
 
     /**
-     * Removes album and keeps the same order
+     * Removes album and keeps the same order if the album exists in array list
      * @param Albumn album
      * @return true if the album is removed, and false if the album is not in the list
      */
@@ -79,7 +79,7 @@ public class Collection {
     }
 
     /**
-     * Set to not available 
+     * Set to not available
      * @param Album album
      * @return true if the getAvailable field is changed to false,
      *          false if it is not in the list or the field is already false
@@ -163,7 +163,7 @@ public class Collection {
     /**
      * Orders the album list by Date
      */
-    public void inOrderDate(){
+    private void inOrderDate(){
         int n = numAlbums;
         for (int i = 1; i < n; i++){
             Album key = albums[i];
@@ -180,7 +180,7 @@ public class Collection {
     /**
      * Orders the album list by Genre
      */
-    public void inOrderGenre(){
+    private void inOrderGenre(){
         int n = numAlbums;
         for (int i = 1; i < n; i++){
             Album key = albums[i];
@@ -196,7 +196,7 @@ public class Collection {
     /**
      * Initializes album
      */
-    public void albumStart(){
+    private void albumStart(){
         Album[] temp = new Album[1];
         albums = temp;
     }
