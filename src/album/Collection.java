@@ -29,9 +29,13 @@ public class Collection {
      * Increase the capacity of the array list by 4
      */
     private void grow() {
-        Album[] temp = copyOver(albums, 4);
-        numAlbums += 4;
-        albums = temp;
+        Album[] arr = new Album[albums.length + 4];
+        int i;
+        for (i = 0; i < albums.length; i++){
+            arr[i] = albums[i];
+        }
+
+        albums =  arr;
     }
 
     /**
@@ -40,16 +44,14 @@ public class Collection {
      * @return true if the album is added, false if the album already exists in the list
      */
     public boolean add(Album album) {
-        if (find(album) == -1){
-            Album[] temp = copyOver(albums, 1);
-            temp[numAlbums] = album;
+        if (find(album) != -1) {
+            int length = albums.length;
+            if(albums[length-1] == null){grow();}
+            albums[numAlbums] = album;
             numAlbums++;
-            albums = temp;
             return true;
         }
-        else{
-            return false;
-        }
+        return false;
     }
 
     /**
@@ -60,7 +62,7 @@ public class Collection {
     public boolean remove(Album album) {
         int i = find(album);
         if (i == -1){return false;}
-        Album[] temp = new Album[numAlbums-1];
+        Album[] temp = new Album[albums.length];
         int j;
         for (j = 0; j < i; j++){
             temp[j] = albums[j];
@@ -68,6 +70,7 @@ public class Collection {
         for (i = i+1; i < albums.length - 1; i++){
             temp[i-1] = albums[i+1];
         }
+        numAlbums--;
         return true;
     }
 
@@ -152,22 +155,6 @@ public class Collection {
         }
     }
 
-    /**
-     * Copies the Album list and extends by n, alternative to the grow() method
-     * @param album, num to extend the list
-     * @return new Album array
-     */
-    public Album[] copyOver(Album[] album, int num){
-        Album[] arr = new Album[album.length];
-        int i;
-        for (i = 0; i < album.length; i++){
-            arr[i] = album[i];
-        }
-        for (i = album.length; i < (album.length + num); i++){
-            arr[i] = null;
-        }
-        return arr;
-    }
 
     /**
      * Orders the album list by Date //TODO: finish this method
@@ -175,12 +162,13 @@ public class Collection {
      * @return edited album
      */
     public Album[] inOrderDate(Album[] album){
-        int n = album.length;
-        for (int i = 0; i < n; i++){
+        int n = numAlbums;
+        for (int i = 1; i < n; i++){
             Album key = album[i];
             int j = i - 1;
             Date temp = key.getReleaseDate();
-            while(j >= 0 && temp.compareTo(album[j].getReleaseDate())){
+            int dateCompare = temp.compareTo(album[j].getReleaseDate());
+            while(j >= 0 && dateCompare > 0){
                 album[j + 1] = album[j];
                 j = j-1;
             }
@@ -195,7 +183,7 @@ public class Collection {
      * @return edited album
      */
     public Album[] inOrderGenre(Album[] album){
-        int n = album.length;
+        int n = numAlbums;
         for (int i = 1; i < n; i++){
             Album key = album[i];
             int j = i - 1;
