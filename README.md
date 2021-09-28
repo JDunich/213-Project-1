@@ -1,4 +1,9 @@
-# 213-Project-1
+# 213-Project-1 #
+
+## Overview ##
+
+The following project was a part of the Rutgers CS-213 Class. In it is the source code for a program that reads Albums that are given in the command line a preforms a 
+function given the user input.
 
 ## Project Description  ##
 
